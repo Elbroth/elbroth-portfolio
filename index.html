@@ -9,6 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Person","name":"Clement Amos","alternateName":"Elbroth","url":"https://elbroth.netlify.app","sameAs":["https://x.com/dyslexia_0x"],"jobTitle":"Web3 Community Operations · AI Builder","email":"mailto:clementamos2005@gmail.com","knowsAbout":["Web3","Community Operations","DeFi","NFTs","AI Automation","Prompt Engineering","Discord","React"]}
+  </script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
@@ -27,6 +30,8 @@
   <meta name="twitter:site" content="@dyslexia_0x">
 </head>
 <body>
+  <!-- Scroll progress -->
+  <div id="scrollProgress" aria-hidden="true"></div>
   <!-- Grain overlay -->
   <div class="grain" aria-hidden="true"></div>
 
@@ -72,7 +77,7 @@
         <span class="hero__name">Elbroth</span>
       </h1>
       <p class="hero__subtitle reveal">
-        Web3 community operator · AI & automation builder · Product thinker
+        <span class="role-rotate" id="roleRotate">Web3 Community Operator</span>
       </p>
       <p class="hero__tagline reveal">
         5+ years building and managing <span class="highlight">Web3 communities</span>. Now expanding into <span class="highlight">AI-powered tools</span>, <span class="highlight">automation</span> and <span class="highlight">software development</span>.
@@ -90,6 +95,24 @@
       </div>
     </div>
   </section>
+
+  <!-- ===== TICKER ===== -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__track" id="tickerTrack">
+      <span class="ticker__item"><span class="tick-dot"></span>Discord</span>
+      <span class="ticker__item"><span class="tick-dot"></span>Telegram</span>
+      <span class="ticker__item"><span class="tick-dot"></span>X / Twitter</span>
+      <span class="ticker__item"><span class="tick-dot"></span>Ambassador Programs</span>
+      <span class="ticker__item"><span class="tick-dot"></span>DeFi</span>
+      <span class="ticker__item"><span class="tick-dot"></span>NFTs</span>
+      <span class="ticker__item"><span class="tick-dot"></span>GameFi</span>
+      <span class="ticker__item"><span class="tick-dot"></span>Prompt Engineering</span>
+      <span class="ticker__item"><span class="tick-dot"></span>AI Automation</span>
+      <span class="ticker__item"><span class="tick-dot"></span>React</span>
+      <span class="ticker__item"><span class="tick-dot"></span>Community Growth</span>
+      <span class="ticker__item"><span class="tick-dot"></span>Crisis Comms</span>
+    </div>
+  </div>
 
   <!-- ===== ABOUT ===== -->
   <section class="section about" id="about">
@@ -139,21 +162,21 @@
         <p class="section__desc">Community operations, AI experimentation and product thinking — each domain fueling the others.</p>
       </div>
       <div class="domains__grid">
-        <div class="domain-card reveal" style="--accent: #00d4aa;">
+        <div class="domain-card domain-card--wide spotlight tilt reveal" style="--accent: #00d4aa;">
           <div class="domain-card__icon">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
           </div>
           <h3>Web3 Community Operations</h3>
           <p>5+ years hands-on experience across Discord, Telegram and X. Moderation, engagement, ambassador programs and community growth across multiple protocols.</p>
         </div>
-        <div class="domain-card reveal" style="--accent: #f59e0b;">
+        <div class="domain-card spotlight tilt reveal" style="--accent: #f59e0b;">
           <div class="domain-card__icon">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a4 4 0 0 1 4 4v1a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V6a4 4 0 0 1 4-4z"/><path d="M6 10h12l-1 10a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 10z"/><circle cx="12" cy="15" r="2"/></svg>
           </div>
           <h3>AI & Automation</h3>
           <p>Building AI agents, prompt engineering systems and automation tools. Exploring computer-use agents and AI-powered development workflows.</p>
         </div>
-        <div class="domain-card reveal" style="--accent: #6366f1;">
+        <div class="domain-card spotlight tilt reveal" style="--accent: #6366f1;">
           <div class="domain-card__icon">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/><path d="M7 8h2m4 0h4M7 12h10"/></svg>
           </div>
@@ -173,64 +196,54 @@
         <p class="section__desc">Five years of hands-on work across Web3 communities — from moderation and ambassador programs to project operations and growth.</p>
       </div>
       <div class="experience__timeline">
-        <div class="timeline-item reveal">
+        <div class="timeline-item spotlight reveal">
           <div class="timeline-item__marker"></div>
           <div class="timeline-item__content">
             <div class="timeline-item__header">
-              <h3>Lead Moderator</h3>
-              <span class="timeline-item__org">Bastion</span>
+              <h3>Community Manager</h3>
+              <span class="timeline-item__org">Bastion: Gauntlet of the Chosen · 2025</span>
             </div>
-            <p>Led community moderation efforts, setting standards and maintaining a healthy, engaged community environment.</p>
+            <p>Managed and grew a global gaming community on Discord and X through pre-launch and alpha demo phases. Primary point of contact for early players across time zones; led the moderation team from day one of launch and designed engagement programs around Alpha character acquisition. Grew community engagement by 50%+ during the demo phase.</p>
           </div>
         </div>
-        <div class="timeline-item reveal">
+        <div class="timeline-item spotlight reveal">
           <div class="timeline-item__marker"></div>
           <div class="timeline-item__content">
             <div class="timeline-item__header">
-              <h3>Nigerian Community Manager</h3>
-              <span class="timeline-item__org">TradingLeagues</span>
+              <h3>Community & Social Media Manager</h3>
+              <span class="timeline-item__org">Good Morning Music · 2024 – 2025</span>
             </div>
-            <p>Managed and grew the Nigerian community segment, driving local engagement, onboarding and adoption.</p>
+            <p>Ran communities across Discord, Telegram and X for a Web3 music and NFT platform — listening parties, artist AMAs, fan competitions. Created content amplifying artist drops and collaborations, monitored engagement metrics and adjusted strategy from data. Increased community interaction by 50%+ through event-driven engagement.</p>
           </div>
         </div>
-        <div class="timeline-item reveal">
+        <div class="timeline-item spotlight reveal">
           <div class="timeline-item__marker"></div>
           <div class="timeline-item__content">
             <div class="timeline-item__header">
-              <h3>Ambassador</h3>
-              <span class="timeline-item__org">Heroes of NFT</span>
+              <h3>Community Manager</h3>
+              <span class="timeline-item__org">The Crypto Recruiters · 2023 – 2024</span>
             </div>
-            <p>Represented the project as an ambassador, driving awareness, community participation and ecosystem growth.</p>
+            <p>First line of response for a crypto and blockchain industry community — inquiries, escalations and moderation across platforms. Organised virtual events and networking initiatives for retention and helped grow the active member base by 50%+.</p>
           </div>
         </div>
-        <div class="timeline-item reveal">
+        <div class="timeline-item spotlight reveal">
           <div class="timeline-item__marker"></div>
           <div class="timeline-item__content">
             <div class="timeline-item__header">
-              <h3>Social Media Manager</h3>
-              <span class="timeline-item__org">HitPiece · Good Morning Music</span>
+              <h3>Community Manager</h3>
+              <span class="timeline-item__org">Metaversana · 2019 – 2022</span>
             </div>
-            <p>Managed Instagram presence and content strategy for multiple projects, building engagement from the ground up.</p>
+            <p>Full ownership of community operations: Discord architecture, bot setup (MEE6, Combot, Dyno), ambassador program design, moderation and daily content. Hosted Twitter Spaces and acted as the direct link between core team and community — translating dev updates into accessible comms.</p>
           </div>
         </div>
-        <div class="timeline-item reveal">
+        <div class="timeline-item spotlight reveal">
           <div class="timeline-item__marker"></div>
           <div class="timeline-item__content">
             <div class="timeline-item__header">
-              <h3>Community Operations</h3>
-              <span class="timeline-item__org">SagaDAO · Kismi.app · StreamSpeak</span>
+              <h3>More Roles & Contributions</h3>
+              <span class="timeline-item__org">Across the ecosystem</span>
             </div>
-            <p>Contributed to community operations, engagement strategies and project support across multiple Web3 initiatives.</p>
-          </div>
-        </div>
-        <div class="timeline-item reveal">
-          <div class="timeline-item__marker"></div>
-          <div class="timeline-item__content">
-            <div class="timeline-item__header">
-              <h3>Beta Tester & Contributor</h3>
-              <span class="timeline-item__org">InfinitSwap AI · Vanamonde · $MetaMusk</span>
-            </div>
-            <p>Early testing, strategy development, paid promotional work and feedback for emerging Web3 and AI products.</p>
+            <p>Nigerian Community Manager at TradingLeagues · Ambassador at Heroes of NFT · Social Media Manager at HitPiece & Good Morning Music · Beta Tester & Contributor for InfinitSwap AI, Vanamonde and $MetaMusk.</p>
           </div>
         </div>
       </div>
@@ -247,7 +260,7 @@
       </div>
       <div class="projects__grid">
 
-        <article class="project-card project-card--featured reveal">
+        <article class="project-card project-card--featured spotlight tilt reveal">
           <div class="project-card__glow"></div>
           <div class="project-card__tags">
             <span class="tag tag--web">Web App</span>
@@ -262,7 +275,7 @@
           </div>
         </article>
 
-        <article class="project-card reveal">
+        <article class="project-card spotlight tilt reveal">
           <div class="project-card__glow"></div>
           <div class="project-card__tags">
             <span class="tag tag--medical">Medical</span>
@@ -277,7 +290,7 @@
           </div>
         </article>
 
-        <article class="project-card reveal">
+        <article class="project-card spotlight tilt reveal">
           <div class="project-card__glow"></div>
           <div class="project-card__tags">
             <span class="tag tag--web3">Web3</span>
@@ -291,7 +304,7 @@
           </div>
         </article>
 
-        <article class="project-card reveal">
+        <article class="project-card spotlight tilt reveal">
           <div class="project-card__glow"></div>
           <div class="project-card__tags">
             <span class="tag tag--ai">AI</span>
@@ -305,7 +318,7 @@
           </div>
         </article>
 
-        <article class="project-card reveal">
+        <article class="project-card spotlight tilt reveal">
           <div class="project-card__glow"></div>
           <div class="project-card__tags">
             <span class="tag tag--medical">Medical</span>

@@ -191,9 +191,104 @@
     }, { passive: true });
   }
 
+  // ===== SCROLL PROGRESS BAR =====
+  const progress = document.getElementById('scrollProgress');
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (progress) progress.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  // ===== SPOTLIGHT CARDS (mouse-tracked glow) =====
+  document.querySelectorAll('.spotlight').forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--sx', (e.clientX - rect.left) + 'px');
+      card.style.setProperty('--sy', (e.clientY - rect.top) + 'px');
+    });
+  });
+
+  // ===== 3D TILT CARDS =====
+  if (window.matchMedia('(min-width: 768px)').matches) {
+    document.querySelectorAll('.tilt').forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width - 0.5;
+        const py = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `perspective(900px) rotateY(${px * 6}deg) rotateX(${-py * 6}deg) translateY(-4px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+  }
+
+  // ===== MAGNETIC BUTTONS =====
+  if (window.matchMedia('(min-width: 768px)').matches) {
+    document.querySelectorAll('.btn--primary, .btn--ghost').forEach((btn) => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const mx = ((e.clientX - rect.left) / rect.width - 0.5) * 10;
+        const my = ((e.clientY - rect.top) / rect.height - 0.5) * 6;
+        btn.style.setProperty('--mx', mx + 'px');
+        btn.style.setProperty('--my', my + 'px');
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.setProperty('--mx', '0px');
+        btn.style.setProperty('--my', '0px');
+      });
+    });
+  }
+
+  // ===== ROTATING HERO ROLE =====
+  const roleEl = document.getElementById('roleRotate');
+  if (roleEl) {
+    const roles = [
+      'Web3 Community Operator',
+      'AI & Automation Builder',
+      'Ambassador Program Designer',
+      'Prompt Engineer',
+      'Product Thinker'
+    ];
+    let roleIndex = 0;
+    let charIndex = roles[0].length;
+    let deleting = false;
+
+    function typeRole() {
+      const current = roles[roleIndex];
+      if (deleting) {
+        charIndex--;
+      } else {
+        charIndex++;
+      }
+      roleEl.textContent = current.slice(0, charIndex);
+
+      let delay = deleting ? 35 : 75;
+
+      if (!deleting && charIndex === current.length) {
+        delay = 2200; // hold full text
+        deleting = true;
+      } else if (deleting && charIndex === 0) {
+        deleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+        delay = 400;
+      }
+      setTimeout(typeRole, delay);
+    }
+    setTimeout(typeRole, 1800);
+  }
+
+  // ===== DUPLICATE TICKER FOR SEAMLESS LOOP =====
+  const tickerTrack = document.getElementById('tickerTrack');
+  if (tickerTrack) {
+    tickerTrack.innerHTML += tickerTrack.innerHTML;
+  }
+
   // ===== CONSOLE EASTER EGG =====
   console.log(
-    '%c⚡ Elbroth Portfolio',
+    '%c⚡ Elbroth Portfolio v3',
     'color: #00d4aa; font-size: 20px; font-weight: bold;'
   );
   console.log(

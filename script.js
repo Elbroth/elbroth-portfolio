@@ -219,22 +219,29 @@
   });
 
   // ===== 3D TILT CARDS =====
-  if (window.matchMedia('(min-width: 768px)').matches) {
+  // Desktop pointers only, never before the card has revealed (avoids clobbering the fade-in
+  // transform), and never for reduced-motion users.
+  const canTilt = window.matchMedia('(min-width: 768px) and (hover: hover) and (pointer: fine)').matches &&
+                  !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (canTilt) {
     document.querySelectorAll('.tilt').forEach((card) => {
       card.addEventListener('mousemove', (e) => {
+        if (card.classList.contains('reveal') && !card.classList.contains('visible')) return;
         const rect = card.getBoundingClientRect();
         const px = (e.clientX - rect.left) / rect.width - 0.5;
         const py = (e.clientY - rect.top) / rect.height - 0.5;
+        card.classList.add('tilting');
         card.style.transform = `perspective(900px) rotateY(${px * 6}deg) rotateX(${-py * 6}deg) translateY(-4px)`;
       });
       card.addEventListener('mouseleave', () => {
+        card.classList.remove('tilting');
         card.style.transform = '';
       });
     });
   }
 
   // ===== MAGNETIC BUTTONS =====
-  if (window.matchMedia('(min-width: 768px)').matches) {
+  if (canTilt) {
     document.querySelectorAll('.btn--primary, .btn--ghost').forEach((btn) => {
       btn.addEventListener('mousemove', (e) => {
         const rect = btn.getBoundingClientRect();
@@ -262,9 +269,20 @@
     ];
     let roleIndex = 0;
     let charIndex = roles[0].length;
-    let deleting = false;
+    // The first role is already in the HTML, so the first tick starts by deleting it.
+    // (Starting with deleting=false made charIndex run past the end and the loop never
+    // switched roles — the subtitle stayed frozen.)
+    let deleting = true;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function typeRole() {
+      // Reduced motion: swap whole words every few seconds instead of typing letter by letter.
+      if (reduceMotion) {
+        roleIndex = (roleIndex + 1) % roles.length;
+        roleEl.textContent = roles[roleIndex];
+        setTimeout(typeRole, 3500);
+        return;
+      }
       const current = roles[roleIndex];
       if (deleting) {
         charIndex--;
@@ -275,10 +293,10 @@
 
       let delay = deleting ? 35 : 75;
 
-      if (!deleting && charIndex === current.length) {
+      if (!deleting && charIndex >= current.length) {
         delay = 2200; // hold full text
         deleting = true;
-      } else if (deleting && charIndex === 0) {
+      } else if (deleting && charIndex <= 0) {
         deleting = false;
         roleIndex = (roleIndex + 1) % roles.length;
         delay = 400;

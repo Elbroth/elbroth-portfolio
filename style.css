@@ -1221,9 +1221,9 @@ img { max-width: 100%; display: block; }
   .btn { width: 100%; justify-content: center; max-width: 280px; }
 }
 /* =====================================================
-   V3 UPGRADE LAYER â€” vibe-coding inspired
-   Spotlight cards Â· animated gradients Â· marquee Â·
-   magnetic buttons Â· scroll progress Â· refined type
+   V3 UPGRADE LAYER — vibe-coding inspired
+   Spotlight cards · animated gradients · marquee ·
+   magnetic buttons · scroll progress · refined type
    ===================================================== */
 
 /* ---------- scroll progress bar ---------- */
@@ -1327,7 +1327,7 @@ img { max-width: 100%; display: block; }
 /* ---------- timeline: animated line fill ---------- */
 .experience__timeline{position:relative}
 .experience__timeline::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+  content:'';position:absolute;left:6px;top:0;bottom:0;width:2px;
   background:linear-gradient(180deg,#00d4aa,#7c6bf0 60%,transparent);
   opacity:.35;
 }
@@ -1378,6 +1378,10 @@ img { max-width: 100%; display: block; }
   transform:scaleX(0);transform-origin:left;transition:transform .25s;
 }
 .nav__links a:hover::after,.nav__link--active::after{transform:scaleX(1)}
+
+/* ---------- keep scroll indicator centered while it fades in ---------- */
+.hero__scroll.reveal{transform:translate(-50%,36px)}
+.hero__scroll.reveal.visible{transform:translate(-50%,0)}
 
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce){

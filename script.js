@@ -11,6 +11,14 @@
     lucide.createIcons();
   }
 
+  // ===== EMAIL LINK (assembled here so spam bots can't read it from the HTML) =====
+  const emailLink = document.getElementById('emailLink');
+  if (emailLink) {
+    const address = emailLink.dataset.user + '@' + emailLink.dataset.domain;
+    emailLink.setAttribute('href', 'mailto:' + address);
+    emailLink.setAttribute('title', address);
+  }
+
   // ===== SCROLL REVEAL =====
   const revealElements = document.querySelectorAll('.reveal');
 
